@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.callbacks import TensorBoard
 
 # Генерируем уникальное имя для модели
-NAME = "cat-vs-dog-prediction-{int(time.time())}"
+NAME = "animals-prediction-{int(time.time())}"
 
 # Создаем объект TensorBoard Callback для записи метрик и логов обучения во время обучения модели в Keras
 # и указываем дирректорию 'logs/' для записи логов.
