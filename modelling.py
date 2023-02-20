@@ -7,6 +7,8 @@ from tensorflow.keras.callbacks import TensorBoard
 # Генерируем уникальное имя для модели
 NAME = "cat-vs-dog-prediction-{int(time.time())}"
 
+# Создаем объект TensorBoard Callback для записи метрик и логов обучения во время обучения модели в Keras
+# и указываем дирректорию 'logs/' для записи логов.
 tensorboard = TensorBoard(log_dir='logs/')
 
 # Загружаем данные из файлов X.pkl и y.pkl
@@ -26,6 +28,7 @@ model.add(MaxPooling2D((2, 2)))
 model.add(Conv2D(64, (3, 3), activation='relu'))
 model.add(MaxPooling2D((2, 2)))
 
+# Слой закоментрован для проведения сравнительного анализа обучаемой модели
 # model.add(Conv2D(64, (3, 3), activation='relu'))
 # model.add(MaxPooling2D((2, 2)))
 
@@ -34,6 +37,7 @@ model.add(Flatten())
 
 # Добавляем полносвязные слои
 model.add(Dense(128, input_shape=X.shape[1:], activation='relu'))
+# Слой закоментрован для проведения сравнительного анализа обучаемой модели
 # model.add(Dense(128, activation='relu'))
 
 # Добавляем выходной слой с функцией активации softmax
