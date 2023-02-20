@@ -1,3 +1,4 @@
+import datetime
 import pickle
 import numpy as np
 from tensorflow.keras.models import Sequential
@@ -5,7 +6,7 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from tensorflow.keras.callbacks import TensorBoard
 
 # Генерируем уникальное имя для модели
-NAME = "animals-prediction-{int(time.time())}"
+NAME = f"animals-prediction-{datetime.datetime.now().date().strftime('%y.%m.%d')}"
 
 # Создаем объект TensorBoard Callback для записи метрик и логов обучения во время обучения модели в Keras
 # и указываем дирректорию 'logs/' для записи логов.
@@ -16,7 +17,8 @@ X = pickle.load(open('X.pkl', 'rb'))
 y = pickle.load(open('y.pkl', 'rb'))
 
 # Нормализуем данные и изменяем размерность массива X
-X = X.astype(np.float32) / 255.0
+X = X / 255
+X = X.reshape(-1, 200, 200, 1)
 
 # Создаем последовательную модель
 model = Sequential()
@@ -50,6 +52,5 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 model.fit(X, y, epochs=5, validation_split=0.1, batch_size=32, callbacks=[tensorboard])
 
 # Сохраняем обученную модель в файл
-model_name = f"model-animals.model"
-model.save(model_name)
-print(f"The model was saved under the name '{model_name}'")
+model.save(NAME)
+print(f"The model was saved under the name '{NAME}'.model")

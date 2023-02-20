@@ -23,7 +23,7 @@ for category in CATEGORIES:
     for img in tqdm(os.listdir(path), desc=f'{index}) Classification {category}s...'):
         img_path = os.path.join(path, img)  # путь к текущему изображению
         label = CATEGORIES.index(category)  # метка класса изображения
-        arr = cv2.imread(img_path, cv2.IMREAD_COLOR)  # загрузка изображения
+        arr = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  # загрузка изображения
         new_arr = cv2.resize(arr, (IMG_SIZE, IMG_SIZE))  # изменение размера изображения
         data.append([new_arr, label])  # добавление признаков и метки в список признаков и меток
         pass
@@ -45,5 +45,6 @@ y = np.array(y)  # преобразование списка меток в ма�
 
 # С помощью метода pickle.dump() сохраняем массивы X и y в два файла X.pkl и y.pkl соответственно:
 pickle.dump(X, open('X.pkl', 'wb'))
+pickle.dump(y, open('y.pkl', 'wb'))
 
 print("Classification completed!")

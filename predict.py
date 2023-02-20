@@ -12,19 +12,19 @@ CATEGORIES = ['chicken', 'cat', 'dog', 'cow', 'elephant', 'horse', 'sheep', 'spi
 
 
 def image(path):
-    img = cv2.imread(path, cv2.IMREAD_COLOR)
+    img = cv2.imread(path, cv2.IMREAD_GRAYSCALE)
     new_arr = cv2.resize(img, (200, 200))
     new_arr = np.array(new_arr)
-    new_arr = new_arr.reshape(-1, 200, 200, 3)
+    new_arr = new_arr.reshape(-1, 200, 200)
     return new_arr
 
 
 # Загружается предварительно обученная модель (model), которая будет использоваться для предсказания класса изображения.
 # название модели у вас можеть быть другой!
-model = keras.models.load_model('model-20.02.2023_01.55.model')
+model = keras.models.load_model('animals-prediction-23.02.20')
 
 # Указывается путь к изображению для которое надо распознать.
-PATH = f"F:\\image.jpeg"
+PATH = f"F:\\image3.jpeg"
 
 # Выполняется предсказание класса изображения с помощью модели model и функции image для каждого изображения в
 # директории.
